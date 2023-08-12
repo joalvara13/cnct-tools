@@ -1,0 +1,15 @@
+form {
+  border: solid;
+  padding: 1em;
+}
+
+input[type=submit] {
+  margin-top: 0.8em;
+  padding: 4px;
+}
+
+select, input[type=number] {
+  padding: 6px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
