@@ -7,15 +7,16 @@ let sqft350 = '';
 let occTotal = '';
 let btu = '';
 let tons = '';
+let occLoad = '';
 
 
 function AirEstimator() {
     
     function CalcSqft350() {
         let squareFeet=document.getElementById("sqft").value;
-        sqft350 = +squareFeet * 350;
+        sqft350 = +squareFeet * 300;
 
-        //console.log('Sqft * 350 = ' + sqft350);
+        console.log('Sqft * 350 = ' + sqft350);
     };
 
     function CalcCeiling() {
@@ -28,11 +29,11 @@ function AirEstimator() {
         } else if (ceilingHeight <= 8) {
             clg = 1
         }
-            //console.log('ceiling height % = ' + clg);
+            console.log('ceiling height % = ' + clg);
         }
     
     function CalcOcc() {
-        let occLoad=document.getElementById("occload").value;
+        occLoad=document.getElementById("occload").value;
         let occType=document.getElementById("occtype").value;
 
         if (occType === "residential") {
@@ -44,6 +45,8 @@ function AirEstimator() {
         } else if (occType === "assembly") {
             occTypeNum = 60;
         } 
+
+        //console.log(occLoad);
 
         occTotal = occTypeNum * occLoad;
 
@@ -67,6 +70,7 @@ function AirEstimator() {
 
     function PostTons() {
         document.getElementById("calculation").innerHTML=Math.round(tons) + ' Tons';
+        document.getElementById("btuh").innerHTML=Math.round(btu) + ' BTU/H';
     }
 
     function BTUfunction() {
@@ -74,7 +78,9 @@ function AirEstimator() {
         CalcCeiling();
         CalcOcc();
         CalcRValue();
-        
+
+        console.log(occLoad);
+
         let sfCeiling = sqft350 * clg;
         console.log('Sqft350 * CH% = ' + Math.round(sfCeiling));
 
@@ -91,11 +97,7 @@ function AirEstimator() {
     }
 
     
-
-    
-    
-        
-    return (
+   return (
         <div>
            <table className="panel">
                 <tbody>
@@ -142,6 +144,8 @@ function AirEstimator() {
                         <td>
                             <button onClick={BTUfunction}>Calculate</button>
                         </td>                        
+                    </tr>
+                    <tr id="btuh">
                     </tr>
                     <tr>
                         <td id="calculation">
